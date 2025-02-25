@@ -2,7 +2,7 @@ const CONTAINER_SIZE = 768;
 
 const container = document.querySelector(".container");
 
-let gridSize = 16;
+let gridSize = 16; //default value
 let squareSize = CONTAINER_SIZE / gridSize;
 createGrid();
 

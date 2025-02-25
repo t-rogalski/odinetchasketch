@@ -22,7 +22,6 @@ button {
 
 .container {
     margin: auto auto;
-    box-sizing: border-box;
     margin-top: 25px;
     display: flex;
     width: 768px;
