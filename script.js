@@ -2,9 +2,23 @@ const CONTAINER_SIZE = 768;
 
 const container = document.querySelector(".container");
 
-let gridSize = 16; //default value of gridSize
+let gridSize = 16;
 let squareSize = CONTAINER_SIZE / gridSize;
 createGrid();
+
+dark = document.querySelector(".dark");
+dark.addEventListener("click", () => {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        square.style.opacity = 0;
+        square.style.backgroundColor = `black`;
+        square.addEventListener("mouseover", () => {
+            if (parseFloat(square.style.opacity) < 1) {
+                square.style.opacity = parseFloat(square.style.opacity) + 0.1;
+            }
+        });
+    });
+});
 
 paint = document.querySelector(".color");
 paint.addEventListener("click", () => {
@@ -37,6 +51,14 @@ rainbow.addEventListener("click", () => {
     });
 });
 
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", () => {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        square.style.backgroundColor = "white";
+    });
+});
+
 function createGrid() {
     clearGrid();
     for (let i = 0; i < gridSize; i++) {
@@ -47,10 +69,8 @@ function createGrid() {
             square.style.border = "1px solid black";
             square.style.width = `${squareSize}px`;
             square.style.height = `${squareSize}px`;
-            color(square, `black`);
             squaresColumn.appendChild(square);
         }
-
         container.appendChild(squaresColumn);
     }
 }
