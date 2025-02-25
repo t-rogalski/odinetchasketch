@@ -14,7 +14,7 @@ button {
     margin: 15px;
     border-radius: 10px;
     border: 1px red solid;
-    background-color: hsla(204, 52%, 48%, 0.527);
+    background-color: hsl(204, 52%, 45%);
     font-size: 20px;
     color: hsl(0, 0%, 99%);
     font-weight: 600;
@@ -32,4 +32,13 @@ button {
 
 .square {
     box-sizing: border-box;
+}
+
+button:hover {
+    background-color: hsl(204, 52%, 60%);
+}
+
+button:active {
+    background-color: hsl(204, 52%, 45%);
+    color: hsl(0, 0%, 70%);
 }
