@@ -6,67 +6,68 @@ let gridSize = 16;
 let squareSize = CONTAINER_SIZE / gridSize;
 createGrid();
 
-dark = document.querySelector(".dark");
+const dark = document.querySelector(".dark");
 dark.addEventListener("click", () => {
+    resetEventListeners();
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
         square.style.opacity = 0;
-        square.style.backgroundColor = `black`;
+        square.style.backgroundColor = "black";
         square.addEventListener("mouseover", () => {
-            if (parseFloat(square.style.opacity) < 1) {
-                square.style.opacity = parseFloat(square.style.opacity) + 0.1;
+            let currentOpacity = parseFloat(square.style.opacity) || 0;
+            if (currentOpacity < 1) {
+                square.style.opacity = currentOpacity + 0.1;
             }
         });
     });
 });
 
-paint = document.querySelector(".color");
+const paint = document.querySelector(".color");
 paint.addEventListener("click", () => {
+    resetEventListeners();
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
-        color(square, `black`);
+        color(square, "black");
     });
 });
 
-sizeChanger = document.querySelector(".sizeChanger");
+const sizeChanger = document.querySelector(".sizeChanger");
 sizeChanger.addEventListener("click", () => {
     gridSize = parseInt(prompt("How many columns and rows"));
     squareSize = CONTAINER_SIZE / gridSize;
     createGrid();
 });
 
-erase = document.querySelector(".erase");
+const erase = document.querySelector(".erase");
 erase.addEventListener("click", () => {
+    resetEventListeners();
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
-        color(square, `white`);
+        color(square, "white");
     });
 });
 
-rainbow = document.querySelector(".rainbow");
+const rainbow = document.querySelector(".rainbow");
 rainbow.addEventListener("click", () => {
+    resetEventListeners();
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
         color(square, randomColor());
     });
 });
 
-const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", () => {
-    const squares = document.querySelectorAll(".square");
-    squares.forEach((square) => {
-        square.style.backgroundColor = "white";
-    });
+const clear = document.querySelector(".clear");
+clear.addEventListener("click", () => {
+    clearGrid();
 });
 
 function createGrid() {
-    clearGrid();
+    removeGrid();
     for (let i = 0; i < gridSize; i++) {
         const squaresColumn = document.createElement("div");
         for (let j = 0; j < gridSize; j++) {
             const square = document.createElement("div");
             square.className = "square";
-            square.style.border = "1px solid black";
             square.style.width = `${squareSize}px`;
             square.style.height = `${squareSize}px`;
             squaresColumn.appendChild(square);
@@ -77,11 +78,12 @@ function createGrid() {
 
 function color(element, color) {
     element.addEventListener("mouseover", () => {
+        element.style.opacity = 1;
         element.style.backgroundColor = `${color}`;
     });
 }
 
-function clearGrid() {
+function removeGrid() {
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
@@ -92,4 +94,20 @@ function randomColor() {
     let green = Math.random() * 255;
     let blue = Math.random() * 255;
     return `rgb(${red}, ${green}, ${blue})`;
+}
+
+function clearGrid() {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        square.style.opacity = 1;
+        square.style.backgroundColor = "white";
+    });
+}
+
+function resetEventListeners() {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        const newSquare = square.cloneNode(true);
+        square.parentNode.replaceChild(newSquare, square);
+    });
 }
