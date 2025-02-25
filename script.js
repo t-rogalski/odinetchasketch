@@ -22,7 +22,7 @@ dark.addEventListener("click", () => {
     });
 });
 
-const paint = document.querySelector(".color");
+const paint = document.querySelector(".paint");
 paint.addEventListener("click", () => {
     resetEventListeners();
     const squares = document.querySelectorAll(".square");
