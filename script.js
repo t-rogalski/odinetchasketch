@@ -29,6 +29,14 @@ erase.addEventListener("click", () => {
     });
 });
 
+rainbow = document.querySelector(".rainbow");
+rainbow.addEventListener("click", () => {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        color(square, randomColor());
+    });
+});
+
 function createGrid() {
     clearGrid();
     for (let i = 0; i < gridSize; i++) {
@@ -57,4 +65,11 @@ function clearGrid() {
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
+}
+
+function randomColor() {
+    let red = Math.random() * 255;
+    let green = Math.random() * 255;
+    let blue = Math.random() * 255;
+    return `rgb(${red}, ${green}, ${blue})`;
 }
